@@ -4,7 +4,15 @@
 <h3>首个github博客</h3>
 
 <div style="background-color:red">
-  <p style="font-weight:bold">前端学习</p>
+  <p>前端学习</p>
+  <ul>
+    <li>开始</li>
+    <li>开始</li>
+    <li>开始</li>
+    <li>开始</li>
+    <li>开始</li>
+    <li>开始</li><li>开始</li>
+  </ul>
 </div>
 </body>
 </html>
