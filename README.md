@@ -1,4 +1,4 @@
-<!DOCTYP hmtl>
+<!DOCTYP html>
 <html>
 <body>
 <h3>首个github博客</h3>
