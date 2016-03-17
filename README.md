@@ -1,2 +1,1 @@
-# Art
-Just another repository
+<h1>博客</h1>
