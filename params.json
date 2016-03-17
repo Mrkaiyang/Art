@@ -1,6 +1,6 @@
 {
   "name": "kaiyang博客",
   "tagline": "kaiyang博客",
-  "body": "# Art\r\nkaiyang博客\r\n",
+  "body": "\r\n<html>\r\n<body>\r\n<h3>首个github博客</h3>\r\n\r\n<div style=\"background-color:red\">\r\n  <p>前端学习</p>\r\n  <ul>\r\n    <li>开始</li>\r\n    <li>开始</li>\r\n    <li>开始</li>\r\n    <li>开始</li>\r\n    <li>开始</li>\r\n    <li>开始</li><li>开始</li>\r\n  </ul>\r\n</div>\r\n</body>\r\n</html>\r\n",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
