@@ -20,9 +20,24 @@ var wall11=new Wall(240,400);
 var wall12=new Wall(280,400);
 var wall13=new Wall(320,400);
 var wall14=new Wall(360,400);
-var  wall=new Array(wall1,wall2,wall3,wall4,wall5,wall6,wall7,wall8,wall9,wall10,wall11,wall12,wall13,wall14);
+var wall15=new Wall(120,440);
+var wall16=new Wall(120,480);
+var wall17=new Wall(120,520);
+var wall18=new Wall(120,560);
+var wall19=new Wall(200,300);
+var wall20=new Wall(360,300);
+var wall21=new Wall(360,340);
+var wall22=new Wall(360,380);
+var wall23=new Wall(360,440);
+var wall24=new Wall(360,480);
+var wall25=new Wall(360,520);
+var wall26=new Wall(360,560);
+var wall27=new Wall(240,300);
+var wall28=new Wall(280,300);
+var wall29=new Wall(320,300);
+var  wall=new Array(wall1,wall2,wall3,wall4,wall5,wall6,wall7,wall8,wall9,wall10,wall11,wall12,wall13,wall14,wall15,wall16,wall17,wall18,wall19,wall20,wall21,wall22,wall23,wall24,wall25,wall26,wall27,wall28,wall29);
 function drawWall() {
-  var  wall=new Array(wall1,wall2,wall3,wall4,wall5,wall6,wall7,wall8,wall9,wall10,wall11,wall12,wall13,wall14);
+  var  wall=new Array(wall1,wall2,wall3,wall4,wall5,wall6,wall7,wall8,wall9,wall10,wall11,wall12,wall13,wall14,wall15,wall16,wall17,wall18,wall19,wall20,wall21,wall22,wall23,wall24,wall25,wall26,wall27,wall28,wall29);
   for (var i = 0; i < wall.length; i++) {
 
     if(wall[i].isLive==true){
@@ -126,7 +141,6 @@ function Hero(x,y,direct,speed,type) {
    this.tank=Tank;
    this.tank(x,y,direct,speed,type);
   this.shotEnermy=function () {
-
     switch (this.direct){
       case 0:
         heroBullet=new Bullet(this.x+9,this.y,this.direct,10);//全局变量
@@ -145,8 +159,6 @@ function Hero(x,y,direct,speed,type) {
     heroBullet.timer=timer//面向对象引用传递；
     var timer=window.setInterval("heroBullets["+(heroBullets.length-1)+"].run()",50);
   }
-
-  //console.log(heroBullet.x);
   }
 
 function EnemyTank(x,y,direct,speed,type) {
@@ -161,7 +173,7 @@ function EnemyTank(x,y,direct,speed,type) {
     var flag = null;
     switch (this.direct) {
       case 0:
-        for (var i = 0; i < 7; i++) {
+        for (var i = 0; i < wall.length; i++) {
           if ((this.y > 0) && ((this.y - this.speed) >= wall[i].y) &&((this.y - this.speed) < wall[i] + 40) && (this.x >= wall[i].x) &&( this.x < wall[i].x + 40)&&(wall[i].isLive==true)) {
             flag = 1;
           }
@@ -173,7 +185,7 @@ function EnemyTank(x,y,direct,speed,type) {
         }
         break;
       case 1:
-        for (var i = 0; i < 7; i++) {
+        for (var i = 0; i < wall.length; i++) {
           if ((this.x+20 <500) && (this.y+30 > wall[i].y) && (this.y < (wall[i].y + 40)) && ((this.x+30 + this.speed) >= wall[i].x) && ((this.x + this.speed) < (wall[i].x + 40))&&(wall[i].isLive==true)){
             flag = 1;
           }
@@ -186,13 +198,7 @@ function EnemyTank(x,y,direct,speed,type) {
         }
         break;
       case 2:
-        for (var i = 0; i < 7; i++) {
-          if ((this.y+30 >600) && ((this.y + this.speed) >= wall[i].y) &&((this.y + this.speed) < wall[i] + 40) && (this.x >= wall[i].x) &&( this.x < wall[i].x + 40)&&(wall[i].isLive==true)) {
-            flag = 1;
-          }
-        }
-        for(var i=0;i<wall.length;i++){
-
+         for(var i=0;i<wall.length;i++){
           if ((this.y+30<600) && ((this.y+30 + this.speed)>= wall[i].y) &&(this.y+30 + this.speed) < (wall[i].y + 40) && (this.x+20 >= wall[i].x) &&( this.x < wall[i].x + 40)&&(wall[i].isLive==true)){
             flag = 1;
           }
@@ -204,7 +210,7 @@ function EnemyTank(x,y,direct,speed,type) {
         }
         break;
       case 3:
-        for (var i = 0; i < 7; i++) {
+        for (var i = 0; i < wall.length; i++) {
           if ((this.x-20 > 0) && (this.y+30 > wall[i].y) && (this.y < (wall[i].y + 40)) && ((this.x - this.speed) >= wall[i].x) && ((this.x - this.speed) < (wall[i].x + 40))&&(wall[i].isLive==true)){
             flag = 1;
           }
@@ -257,13 +263,10 @@ function EnemyTank(x,y,direct,speed,type) {
        cxt2.fillStyle="yellow";
        cxt2.fillRect(heroBullet.x,heroBullet.y,2,2);
      }
-
    }
-
  }
 //这里我们还需要添加一个函数，用于画出敌人的子弹,当然，画出敌人的子弹和自己的子弹是可以合并的.
 function drawEnemyBullet(tank,i,bullet){
-
   //现在要画出所有子弹
 /*  for( var i=0;i<enemyBullets.length;i++) {*/
     var etBullet = bullet;
@@ -272,8 +275,6 @@ function drawEnemyBullet(tank,i,bullet){
       cxt.fillStyle = "#00FEFE";
       cxt.fillRect(etBullet.x, etBullet.y, 2, 2);
     }
-
-
 }
 //编写一个函数，专门用于判断我的子弹，是否击中了某个敌人坦克
 function isHitEnemyTank(){
