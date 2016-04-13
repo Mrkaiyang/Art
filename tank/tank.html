@@ -16,18 +16,34 @@
       margin-left: 50px;
       margin-top: 100px;
     }
+    #heroMap3
+     {
+       position: absolute;
+       margin-left: 50px;
+       margin-top: 300px;
+      width:500px;
+      background-color: #00b0e8;
+      display:none;
+     }
+    #heroMap3 h1{
+      height:200px;
+      line-height: 200px;
+
+    }
    </style>
 </head>
 <body onkeydown="test()">
 <canvas id="tankMap1" width="500px" height="600px" style="background-color:black" ></canvas>
 <canvas id="heroMap2" width="500px" height="600px" style="background-color:transparent" ></canvas>
+<div id="heroMap3"  style="text-align: center" ><h1>Congratulate,You have won!</h1></div>
 <span id="aa">数据</span><br/><span id="ab">数据</span><br/><span id="ac">数据</span><br/><span id="ad">数据</span><br/><span id="ae">数据</span>
 <script type="text/javascript">
   var drawing=document.getElementById("tankMap1");
   var cxt=drawing.getContext('2d');
   var drawing2=document.getElementById("heroMap2");
   var cxt2=drawing2.getContext('2d');
-  //cxt2.globalAlpha=0.7;
+
+ // cxt3.globalAlpha=0.7;
   //我的坦克
   //定义hero类
 
@@ -129,15 +145,8 @@
       alert("You have Lost");
       window.clearInterval(timer1);
     }
-    for(var i=0;i<enemyTanks.length;i++){
-      var count=enemyTanks.length;
-      if(enemyTanks[i].isLive==false){
-        count--;
-      }
-      if(count==0){
-        alert("You have Win");
-        window.clearInterval(timer1);
-      }
+    if(enemyTanks[0].isLive==false&&enemyTanks[1].isLive==false&&enemyTanks[2].isLive==false&&enemyTanks[3].isLive==false&&enemyTanks[4].isLive==false){
+      document.getElementById("heroMap3").style.display="block";
     }
 
 
@@ -146,7 +155,7 @@
     for(var i=0;i<enemyTanks.length;i++) {
       if (enemyTanks[i].bulletIsLive == false) {
         enemyTanks[i].bulletIsLive = true;
-        console.log(enemyTanks[i].isLive);
+     /*   console.log(enemyTanks[i].isLive);*/
         if(enemyTanks[i].isLive==true){
           switch(enemyTanks[i].direct){
             case 0:
