@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html5经典tank大战</title>
+   <script src="tank.js"></script>
+  <style type="text/css">
+    #tankMap1{
+      position: absolute;
+      margin-left: 50px;
+      margin-top: 100px;
+    }
+    #heroMap2
+    {
+      position: absolute;
+      margin-left: 50px;
+      margin-top: 100px;
+    }
+   </style>
+</head>
+<body onkeydown="test()">
+<canvas id="tankMap1" width="500px" height="600px" style="background-color:black" ></canvas>
+<canvas id="heroMap2" width="500px" height="600px" style="background-color:transparent" ></canvas>
+<canvas id="heroMap3" width="500px" height="600px" style="background-color:transparent" ></canvas>
+<script type="text/javascript">
+  var drawing=document.getElementById("tankMap1");
+  var cxt=drawing.getContext('2d');
+  var drawing2=document.getElementById("heroMap2");
+  var cxt2=drawing2.getContext('2d');
+  var drawing3=document.getElementById("heroMap2");
+  var cxt3=drawing3.getContext('2d');
+  //cxt2.globalAlpha=0.7;
+  //我的坦克
+  //定义hero类
+
+  var hero=new Hero(150,120,0,5,"hero");//全局变量
+  //2、画出敌人坦克思路：a：敌人坦克做成对象-->定义EnergyTank；都是坦克，可以继承一个Tank类，因此
+  // 可以抽象出一个父类，把Hero类和Energy类共有的特点系在Tank类中b：敌人坦克在作战区
+
+  //把绘制函数封装成一个函数，将来可以作为成员函数
+  //将来这函数可以画自己的坦克，也可以画敌人的坦克
+  //tank是一个对象
+//定义敌人的坦克(是单个单个的定义还是放在数组中)
+
+
+  //定义敌人的坦克(敌人的坦克有多少? 思路 : 是单个单个的定义，还是放在数组中?)
+  var enemyTanks=new Array();
+
+  //定义敌人子弹的数组
+
+  var enemyBullets=new Array();
+
+
+  //定义一个炸弹数组(可以存放很多炸弹,)
+
+  var bombs=new Array();
+  //先死后活 ，定3个，后面我们把敌人坦克的数量，作出变量
+  //0->上, 1->右, 2->下 3->左
+/*  for(var i=0;i<3;i++){
+
+    //创建一个坦克
+    var enemyTank=new EnemyTank((i+1)*50,0,2,enmeyColor);
+    //把这个坦克放入数组
+    enemyTanks[i]=enemyTank;
+
+    //启动这个敌人的坦克
+    window.setInterval("enemyTanks["+i+"].run()",50);
+
+    //当创建敌人坦克时就分配子弹
+    var eb=new Bullet(enemyTanks[i].x+9,enemyTanks[i].y+30,2,1.2,"enemy",enemyTanks[i]);
+
+    enemyBullets[i]=eb;
+    //启动该子弹
+    var ettimer=window.setInterval("enemyBullets["+i+"].run()",50);
+    enemyBullets[i].timer=ettimer;
+
+  }*/
+  for(var i=0;i<5;i++){
+    var enemyTank=new EnemyTank((i+1)*50,20,2,2,"enemy");
+    enemyTanks[i]=enemyTank;
+
+    //启动这个敌人的坦克
+    window.setInterval("enemyTanks["+i+"].run()",50);
+    //当创建敌人坦克时就分配子弹
+    var eb=new Bullet(enemyTanks[i].x+9,enemyTanks[i].y+30,2,1.2,"enemy",enemyTanks[i]);
+
+    enemyBullets[i]=eb;
+    //启动该子弹
+    var ettimer=window.setInterval("enemyBullets["+i+"].run()",50);
+    enemyBullets[i].timer=ettimer;
+
+    //画出这个坦克
+    drawTank(enemyTanks[i]);
+  }
+  flashTanMap();
+  //专门写一个函数，用于定时刷新作战区，把要在作战区出现的对象
+
+/*  check();*/
+  function  flashTanMap() {
+    cxt.clearRect(0,0,500,600);
+    drawTank(hero);
+    //画出子弹
+    for(var i=0;i<5;i++){
+		 if(enemyBullets[i].x<0||enemyBullets[i].x>250||enemyBullets[i].y<10||enemyBullets[i].y>300){
+		  enemyBullets[i]=new Bullet(enemyTanks[i].x+9,enemyTanks[i].y+30,2,1.2,"enemy",enemyTanks[i]);
+               drawEnemyBullet(enemyTanks[i],i);
+	  		 }else
+		{
+		drawEnemyBullet(enemyTanks[i],i);
+		}
+    }
+    isHitEnemyTank();
+    isHitHreoTank();
+    drawEnemyBomb();
+
+    //画出所有敌人坦克
+    for(var i=0;i<5;i++){
+      drawTank(enemyTanks[i],i);
+    }
+
+  }
+  function flashBullet() {
+    cxt2.globalAlpha=1;
+    cxt2.clearRect(0,0,500,600);
+    drawHeroBullet();
+
+
+
+  }
+  function flashEnemyBullet() {
+
+  }
+
+  function test(evt) {
+
+    evt = (evt) ? evt : ((window.event) ? window.event : "");//火狐window对象没有event属性，所以window.event是不存在的，Firefox只能在事件句柄函数的第一个参数获取事件对象。
+    var code = evt.keyCode?evt.which:evt.keyCode;
+
+
+    switch(code){
+      case 65:
+       // hero.x=hero.x-hero.speed;//不是面向对象
+        hero.moveLeft();
+        break;
+      case 83:
+       // hero.y=hero.y+hero.speed;
+        hero.moveDown();
+        break;
+      case 68:
+        //hero.x=hero.x+hero.speed;
+        hero.moveRight();
+        break;
+      case 87:
+        hero.moveUp();
+        break;
+      case 74:
+        hero.shotEnermy();
+        break;
+    }
+//写一个函数，专门用于定时刷新画布
+    flashTanMap();
+
+  }
+  var timer=setInterval("flashTanMap()",100);
+var timer=setInterval("flashBullet()",100);
+
+
+
+
+</script>
+
+</body>
+</html>
