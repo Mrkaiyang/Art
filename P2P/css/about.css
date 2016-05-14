@@ -3,7 +3,7 @@ h4,span,div,ul,li,p{
 	padding: 0px;
 }
 #body-list{
-	margin: 30px auto 0px auto;
+	margin: 30px auto 20px auto;
 	border: 3px dashed #E74F4D;
 	width: 960px;
 	height: auto;
@@ -12,7 +12,7 @@ h4,span,div,ul,li,p{
 #body-list ul li{
 	display: block;
 	min-height: 100px;
-	border-bottom: 2px dashed #eee;
+	border-bottom: 1px dashed #E74F4D;
 	width: 800px;
 	margin:10px auto 0px auto;
 }
@@ -34,7 +34,7 @@ h4,span,div,ul,li,p{
 	display: block;
 	margin-left: -50px;
 	margin-top:30px;
-	font-size: 30px;
+	font-size: 26px;
 	font-family: "Segoe Script";
 }
 .title{
@@ -44,8 +44,9 @@ h4,span,div,ul,li,p{
 }
 .origin{
 	display: block;
-	margin: 15px 10px 10px 700px;
+	margin: 5px 0px 10px 670px;
 }
 .description{
 	width: 700px;
+	margin-left: 0em;
 }
