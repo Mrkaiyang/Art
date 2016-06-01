@@ -1,0 +1,449 @@
+<!DOCTYPE>
+<html>
+  <head>
+  <title>乌龟自动抓鸡小游戏</title> 
+  </head>
+  <body onkeydown="movekey(event)">
+    <table>
+      <tr>
+         <td></td>
+         <td><input type="button" id="f1" value="up" onclick="move(this)"></td>
+         <td></td>
+	  </tr>
+	     <tr>
+         <td><input type="button" id="f2" value="left" onclick="move(this)"></td>
+         <td></td>
+         <td><input type="button" id="f3" value="right" onclick="move(this)"></td>
+	  </tr>
+	     <tr>
+         <td></td>
+         <td><input type="button" id="f4" onclick="move(this)" value="down"></td>
+         <td></td>
+	  </tr>
+	  
+	</table>
+	<br/>
+	
+	  <div id="div1" style="width:900px;height:600px;border:1px solid;">
+      
+	  <img src="2.jpg" style="width:80px;height:80px;position:absolute;left:9px;top:120px;" id="img1"></img>
+	  
+	  
+	  <img src="3.jpg" style="width:80px;height:80px;position:absolute;left:200px;top:200px;" id="img2" "></img>
+	  <img src="4.jpg" style="width:80px;height:80px;position:absolute;left:300px;top:300px;" id="img3" "></img>
+	  <img src="5.jpg" style="width:80px;height:80px;position:absolute;left:400px;top:400px;" id="img4" "></img>
+	  <img src="6.jpg" style="width:80px;height:80px;position:absolute;left:500px;top:500px;" id="img5" "></img>
+	  <img src="7.jpg" style="width:80px;height:80px;position:absolute;left:600px;top:600px;" id="img6" "></img>
+	  <img src="8.jpg" style="width:80px;height:80px;position:absolute;left:829px;top:635px;" id="img7" "></img>
+      
+	  </div>
+
+	  <input type="button" value="start" onclick="MyStart()" >
+	  <input type="button" value="stop" >
+
+
+	  <script type="text/javascript">
+	  
+        function Tortoise(x,y,img){
+		   this.x=x;
+		   this.y=y;
+		   this.img=img;
+		   this.speed=40;
+		   this.move_up=function(){
+		     this.y-=this.speed;
+			 var wugui=this.img;
+			 wugui.style.top=this.y+"px";
+		   }
+		
+		  this.move_down=function(){
+		     this.y+=this.speed;
+			 var wugui=this.img;
+			 wugui.style.top=this.y+"px";
+		   }
+		
+		  this.move_left=function(){
+		     this.x-=this.speed;
+			  var wugui=this.img;
+			 wugui.style.left=this.x+"px";
+		   }
+		
+		  this.move_right=function(){
+		     this.x+=this.speed;
+			 var wugui=this.img;
+			 wugui.style.left=this.x+"px";
+		   }
+		}
+		function Mario(x,y,img){
+		   this.x=x;
+		   this.y=y;
+		   this.img=img;
+		   this.speed=40;
+		   this.move_up=function(){
+		     this.y-=this.speed;
+			 var mario1=this.img;
+			 mario1.style.top=this.y+"px";
+			 
+			
+			  
+		   }
+		
+		  this.move_down=function(){
+		     this.y+=this.speed;
+			  var mario1=this.img;
+			 mario1.style.top=this.y+"px";
+			
+		   }
+		
+		  this.move_left=function(){
+		     this.x-=this.speed;
+			 var mario1=this.img;
+			 mario1.style.left=this.x+"px";
+			 
+		   }
+		
+		  this.move_right=function(){
+		     this.x+=this.speed;
+			var mario1=this.img;
+			 mario1.style.left=this.x+"px";
+			 
+		   }
+		}
+		function Chicken(x,y){
+            this.x=x;
+			this.y=y;
+	
+
+		}
+       
+		function move(obj){
+		   switch (obj.value)
+		   {
+		   case "up":
+		      tortoise1.move_up();
+			  break;
+		   case "down":
+		      tortoise1.move_down();
+			  break;
+		   
+            case "left":
+		      tortoise1.move_left();
+			  break;
+			     case "right":
+		      tortoise1.move_right();
+		   }
+		} 
+		function movekey(event){
+		   switch (event.keyCode)
+		   {
+		   case 87:
+		     if((tortoise1.y-40)>=120){
+		      tortoise1.move_up();
+			 }else
+			   {
+			    break;
+			   }
+			  break;
+		   case 83:
+		     if((tortoise1.y+40)<=660){
+		      tortoise1.move_down();
+			 }else{
+			  break;
+			 }
+			 break;
+		   
+            case 65:
+			if((tortoise1.x-40)>=9){
+		      tortoise1.move_left();
+			}else
+			   {
+			  break;
+			   }
+			   break;
+			case 68:
+			 if((tortoise1.x+40)<840){
+		      tortoise1.move_right();
+			 }else{
+               break;
+			 }
+			 break;
+			  default:
+			  break;
+		   }
+		}
+		function movezd(){
+		 if(((((tortoise1.x+120)>(mario1.x))&&((tortoise1.y+120)>(mario1.y))&&((mario1.x+120)>(tortoise1.x))&&((mario1.y+120)>(tortoise1.y)))==false)&&
+     	   ((((tortoise1.x+120)>(mario2.x))&&((tortoise1.y+120)>(mario2.y))&&((mario2.x+120)>(tortoise1.x))&&((mario2.y+120)>(tortoise1.y)))==false)&&
+		   ((((tortoise1.x+120)>(mario3.x))&&((tortoise1.y+120)>(mario3.y))&&((mario3.x+120)>(tortoise1.x))&&((mario3.y+120)>(tortoise1.y)))==false)&&
+		   ((((tortoise1.x+120)>(mario4.x))&&((tortoise1.y+120)>(mario4.y))&&((mario4.x+120)>(tortoise1.x))&&((mario4.y+120)>(tortoise1.y)))==false)&&
+		   ((((tortoise1.x+120)>(mario5.x))&&((tortoise1.y+120)>(mario5.y))&&((mario5.x+120)>(tortoise1.x))&&((mario5.y+120)>(tortoise1.y)))==false)
+			){
+			  
+			   if((tortoise1.x+40)<840){
+		      tortoise1.move_right();
+			 }
+			 if((tortoise1.y+40)<=660){
+		      tortoise1.move_down();
+			 }
+			
+           }
+	
+			 else if(((((tortoise1.y+120)>(mario1.y))&&((mario1.y+120)>(tortoise1.y)))==true)||
+     	   ((((tortoise1.y+120)>(mario2.y))&&((mario2.y+120)>(tortoise1.y)))==true)||
+		   ((((tortoise1.y+120)>(mario3.y))&&((mario3.y+120)>(tortoise1.y)))==true)||
+		   ((((tortoise1.y+120)>(mario4.y))&&((mario4.y+120)>(tortoise1.y)))==true)||
+		   ((((tortoise1.y+120)>(mario5.y))&&((mario5.y+120)>(tortoise1.y)))==true)
+			){
+		  if(((tortoise1.y-40)<=120)||((((tortoise1.x+120)>(mario1.x))&&((mario1.x+120)>(tortoise1.x)))==false)||
+     	   ((((tortoise1.x+120)>(mario2.x))&&((mario2.x+120)>(tortoise1.x)))==false)||
+		   ((((tortoise1.x+120)>(mario3.x))&&((mario3.x+120)>(tortoise1.x)))==false)||
+		   ((((tortoise1.x+120)>(mario4.x))&&((mario4.x+120)>(tortoise1.x)))==false)||
+		   ((((tortoise1.x+120)>(mario5.x))&&((mario5.x+120)>(tortoise1.x)))==false)||((tortoise1.x-40)>=9))
+				{
+					tortoise1.move_left();
+				}
+		      else 	if((tortoise1.y-40)>=120){
+		      tortoise1.move_up();
+			}
+			 
+			
+			}
+				
+
+			
+            if(((tortoise1.x+40)>(chicken.x))&&((tortoise1.y+40)>(chicken.y))==true){
+            clearInterval(TimerID);
+			alert("Congratulation!!!")
+			}
+				
+		}
+	    function move2(){
+		   var random1=Math.floor(Math.random()*4+1);
+		   switch(random1)
+		   {
+		   case 1:
+		     if((mario1.y-40)>=120){
+		     mario1.move_up();
+			 }else
+			 {
+			 mario1.move_down(); 
+			 }
+			 break;
+			 case 2:
+		     if((mario1.y+40)<=620){
+		     mario1.move_down();
+			 }else
+			 {
+			 mario1.move_up(); 
+			 }
+			 break;
+		   case 3:
+		      if((mario1.x-40)>=9){
+		     mario1.move_left();
+			 }else
+			 {
+			 mario1.move_right(); 
+			 }
+			 break;
+		   case 4:
+		      if((mario1.x+40)<=909){
+		     mario1.move_right();
+			 }else
+			 {
+			 mario1.move_left(); 
+			 }
+			 break;
+		    }
+		} 
+		function move3(){
+		 var random2=Math.floor(Math.random()*4+1);
+		   switch(random2)
+		   {
+		  	case 1:
+		     if((mario2.y-40)>=120){
+		     mario2.move_up();
+			 }else
+			 {
+			 mario2.move_down(); 
+			 }
+			 break;
+			 case 2:
+		     if((mario2.y+40)<=620){
+		     mario2.move_down();
+			 }else
+			 {
+			 mario2.move_up(); 
+			 }
+			 break;
+		   case 3:
+		      if((mario2.x-40)>=9){
+		     mario2.move_left();
+			 }else
+			 {
+			 mario2.move_right(); 
+			 }
+			 break;
+		   case 4:
+		      if((mario2.x+40)<=909){
+		     mario2.move_right();
+			 }else
+			 {
+			 mario2.move_left(); 
+			 }
+			 break;
+		    }
+		}
+		 function move4(){
+			   var random3=Math.floor(Math.random()*4+1);
+		   switch(random3)
+		   {
+		   		case 1:
+		     if((mario3.y-40)>=120){
+		     mario3.move_up();
+			 }else
+			 {
+			 mario3.move_down(); 
+			 }
+			 break;
+			 case 2:
+		     if((mario3.y+40)<=620){
+		     mario3.move_down();
+			 }else
+			 {
+			 mario3.move_up(); 
+			 }
+			 break;
+		   case 3:
+		      if((mario3.x-40)>=9){
+		     mario3.move_left();
+			 }else
+			 {
+			 mario3.move_right(); 
+			 }
+			 break;
+		   case 4:
+		      if((mario3.x+40)<=909){
+		     mario3.move_right();
+			 }else
+			 {
+			 mario3.move_left(); 
+			 }
+			 break;
+		    }
+		 }
+		  function move5(){
+				   var random4=Math.floor(Math.random()*4+1);
+		   switch(random4)
+		   {
+		   		case 1:
+		     if((mario4.y-40)>=120){
+		     mario4.move_up();
+			 }else
+			 {
+			 mario4.move_down(); 
+			 }
+			 break;
+			 case 2:
+		     if((mario4.y+40)<=620){
+		     mario4.move_down();
+			 }else
+			 {
+			 mario4.move_up(); 
+			 }
+			 break;
+		   case 3:
+		      if((mario4.x-40)>=9){
+		     mario4.move_left();
+			 }else
+			 {
+			 mario4.move_right(); 
+			 }
+			 break;
+		   case 4:
+		      if((mario4.x+40)<=909){
+		     mario4.move_right();
+			 }else
+			 {
+			 mario4.move_left(); 
+			 }
+			 break;
+		    }
+		  }
+		   function move6(){
+				   var random5=Math.floor(Math.random()*4+1);
+		   switch(random5)
+		   {
+		  		   case 1:
+		     if((mario5.y-40)>=120){
+		     mario5.move_up();
+			 }else
+			 {
+			 mario5.move_down(); 
+			 }
+			 break;
+			 case 2:
+		     if((mario5.y+40)<=620){
+		     mario5.move_down();
+			 }else
+			 {
+			 mario5.move_up(); 
+			 }
+			 break;
+		   case 3:
+		      if((mario5.x-40)>=9){
+		     mario5.move_left();
+			 }else
+			 {
+			 mario5.move_right(); 
+			 }
+			 break;
+		   case 4:
+		      if((mario5.x+40)<=909){
+		     mario5.move_right();
+			 }else
+			 {
+			 mario5.move_left(); 
+			 }
+			 break;
+		    }
+		
+		}
+	
+		
+		
+		var obj=document.getElementById("img1");
+		var tortoise1=new Tortoise(9,120,obj);
+        var mario1=new Mario(200,200,document.getElementById("img2"));
+        var mario2=new Mario(300,300,document.getElementById("img3"));
+        var mario3=new Mario(400,400,document.getElementById("img4"));
+        var mario4=new Mario(500,500,document.getElementById("img5"));
+        var mario5=new Mario(600,600,document.getElementById("img6"));
+        var chicken=new Chicken(749,555);
+		function start1(){
+			if(((((tortoise1.x+80)>(mario1.x))&&((tortoise1.y+80)>(mario1.y))&&((mario1.x+80)>(tortoise1.x))&&((mario1.y+80)>(tortoise1.y)))==false)&&
+			   ((((tortoise1.x+80)>(mario2.x))&&((tortoise1.y+80)>(mario2.y))&&((mario2.x+80)>(tortoise1.x))&&((mario2.y+80)>(tortoise1.y)))==false)&&
+			   ((((tortoise1.x+80)>(mario3.x))&&((tortoise1.y+80)>(mario3.y))&&((mario3.x+80)>(tortoise1.x))&&((mario3.y+80)>(tortoise1.y)))==false)&&
+			   ((((tortoise1.x+80)>(mario4.x))&&((tortoise1.y+80)>(mario4.y))&&((mario4.x+80)>(tortoise1.x))&&((mario4.y+80)>(tortoise1.y)))==false)&&
+			   ((((tortoise1.x+80)>(mario5.x))&&((tortoise1.y+80)>(mario5.y))&&((mario5.x+80)>(tortoise1.x))&&((mario5.y+80)>(tortoise1.y)))==false)
+			)
+			{
+			   return movezd(), move2(),move3(),move4(),move5(),move6();
+			}
+		   else 
+			{
+			 clearInterval(TimerID);
+			    alert("game over");
+			}
+			}
+	
+	
+
+
+           function MyStart(){
+		   TimerID=setInterval("start1();",500);
+		   }
+		
+	
+
+	 </script>
+  </body>
+</html>
