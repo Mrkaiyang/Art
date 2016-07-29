@@ -1,0 +1,217 @@
+<!doctype>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>分页</title>
+    <style type="text/css">
+        .title_list ul.bluepoint li
+        {
+            background-image: url(http://images.cnblogs.com/cnblogs_com/zengxiangzhan/WindowsLiveWriter/d064abd774a5_C5D9/dot_title_list_blue_thumb.gif);
+            line-height: 20px;
+            padding-left: 13px;
+            background-repeat: no-repeat;
+            list-style-type: none;
+            background-position: left center; }
+        .title_list ul.bluepoint li a{ text-decoration:none}
+
+        .title_list ul.title_list li span
+        { padding-left: 10px;
+            font-family: arial;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .turn_page_box
+        { padding-bottom: 30px;
+            border-right-width: 0px;
+            zoom: 1;
+            border-top-width: 0px;
+            border-bottom-width: 0px;
+            border-left-width: 0px;
+            padding-top: 0px;
+            font-weight: bold;
+        }
+
+        .turn_page_box .tpb_right a
+        { border-right-width: 0px;
+            background: none transparent scroll repeat 0% 0%;
+            border-top-width: 0px;
+            border-bottom-width: 0px;
+            border-left-width: 0px;
+            text-decoration:none
+        }
+
+        .turn_page_box .tpb_right a:hover {
+            color:#2557bd;
+            text-decoration: underline
+        }
+        .turn_page_box .tpb_right a.cur {
+            background: none transparent scroll repeat 0% 0%;
+            color: #2557bd
+        }
+
+        .turn_page_box .tpb_right a.cur:hover { background: none transparent scroll repeat 0% 0% }
+    </style>
+</head>
+<body>
+<SCRIPT language=javascript>
+    function title_array(title, link_add, store_time) {
+        this.title = title;
+        this.link_add = link_add;
+        this.store_time = store_time;
+    }
+    var ii = 0;
+    var item = new Array();
+    ii++; item[ii] = new title_array('学无止境 25', '#', '(03月17日 23:47)');
+    ii++; item[ii] = new title_array('学无止境 24', '#', '(03月17日 23:42)');
+    ii++; item[ii] = new title_array('学无止境 23', '#', '(03月17日 23:32)');
+    ii++; item[ii] = new title_array('学无止境 22', '#', '(03月17日 23:29)');
+    ii++; item[ii] = new title_array('学无止境 21', '#', '(03月17日 23:19)');
+    ii++; item[ii] = new title_array('学无止境 20', '#', '(03月17日 23:15)');
+    ii++; item[ii] = new title_array('学无止境 19', '#', '(03月17日 23:13)');
+    ii++; item[ii] = new title_array('学无止境 18', '#', '(03月17日 23:12)');
+    ii++; item[ii] = new title_array('学无止境 17', '#', '(03月17日 23:10)');
+    ii++; item[ii] = new title_array('学无止境 16', '#', '(03月17日 22:35)');
+    ii++; item[ii] = new title_array('学无止境 15', '#', '(03月17日 22:29)');
+    ii++; item[ii] = new title_array('学无止境 14', '#', '(03月17日 22:28)');
+    ii++; item[ii] = new title_array('学无止境 13', '#', '(03月17日 22:27)');
+    ii++; item[ii] = new title_array('学无止境 12', '#', '(03月17日 22:26)');
+    ii++; item[ii] = new title_array('学无止境 11', '#', '(03月17日 22:24)');
+    ii++; item[ii] = new title_array('学无止境 10', '#', '(03月17日 22:23)');
+    ii++; item[ii] = new title_array('学无止境 9', '#', '(03月17日 22:02)');
+    ii++; item[ii] = new title_array('学无止境 8', '#', '(03月17日 22:02)');
+    ii++; item[ii] = new title_array('学无止境 7', '#', '(03月17日 22:01)');
+    ii++; item[ii] = new title_array('学无止境 6', '#', '(03月17日 21:51)');
+    ii++; item[ii] = new title_array('学无止境 5', '#', '(03月17日 21:51)');
+    ii++; item[ii] = new title_array('学无止境 4', '#', '(03月17日 21:50)');
+    ii++; item[ii] = new title_array('学无止境 3', '#', '(03月17日 21:31)');
+    ii++; item[ii] = new title_array('学无止境 2', '#', '(03月17日 21:30)');
+    ii++; item[ii] = new title_array('学无止境 1', '#', '(03月17日 21:30)');
+    //要显示的页面
+    var currpage = 1;
+    //一页显示信息条数为40
+    var pagesize = 5;
+    //页数维护所显示的第一页
+    var beginpage = 1;
+    //页数维护所显示的最后一页
+    var endpage = 100;
+    //显示某一页的内容
+    function displaypage(onepage) {
+        if (onepage < 1) {
+            alert("已到达首页");
+            return;
+        }
+        var NumRecords;
+        if (item.length == 1) {
+            NumRecords = item.length;
+        } else {
+            NumRecords = item.length - 1; //信息总条数，减一因为是从下标[1]开始存的信息。
+        }
+//没有信息就返回
+        if (NumRecords <= 0) {
+            return false;
+        }
+        NumPages = Math.floor((NumRecords + (pagesize - 1)) / pagesize); //总页数
+        if (onepage > NumPages) {
+            alert("已经到达尾页");
+            return;
+        }
+        currpage = onepage;
+//该页的第一行
+        var start = pagesize * (currpage - 1) + 1;
+        if (NumRecords == 1) {
+            start = start - 1;
+        }
+        if (start >= item.length) return;
+//装入该页内容
+        var strText = "";
+        for (var i = 1; i <= pagesize / 5; i++) {
+            strText += "<div class=\"title_list\"><ul class=\"title_list bluepoint\">"
+            for (var j = 1; j <= 5; j++) {
+                if (start < item.length) {
+                    strText += "<li><a href=\"" + item[start].link_add + "\" target=\"_blank\">" + item[start].title + "</a><span>" + item[start].store_time + "</span></li>";
+                    start++;
+                }
+            }
+            strText += "</ul></div>"
+        }
+        document.getElementById("title1").innerHTML = strText;
+//如果总页数不足5条
+        if (NumPages < 10) {
+            beginpage = 1;
+            endpage = NumPages;
+        } else {
+//如果显示最前面的5页
+            if (currpage <= 5 && currpage > 0) {
+                beginpage = 1;
+                endpage = 10;
+            }
+//如果显示最后面的5页
+            if (currpage <= NumPages && currpage > (NumPages - 9)) {
+                beginpage = NumPages - 9;
+                endpage = NumPages;
+            }
+//其他情况
+            if (currpage > 5 && currpage < (NumPages - 9)) {
+                if (currpage >= (endpage + 1)) {
+                    beginpage += 10;
+                    endpage += 10;
+                }
+                if (currpage <= (beginpage - 1)) {
+                    beginpage -= 10;
+                    endpage -= 10;
+                }
+            }
+        }
+        var showtext = "";
+        if (NumPages > 0) {
+            showtext += "<span class=\"tpb_right\"><a href=\"javascript:displaypage(1)\" class=\"tpb_btn_previous\"><<</a> ";
+            showtext += "<a href=\"javascript:displaypage(currpage-1)\">上一页</a> ";
+            var currpages = currpage < NumPages - 2 ? currpage + 2 : NumPages;
+            var currpage1 = currpage <= 2 ? 1 : currpage - 2;
+            if (NumPages <= 10) {
+                currpage1 = 1;
+                currpages = NumPages;
+            } else if (currpage1 >= 2) {
+                showtext += "<a href=\"javascript:displaypage(1)\">1</a> ";
+                if (currpage1 > 2) {
+                    showtext += "...";
+                }
+            }
+            for (i = currpage1; i <= currpages; i++) {
+                if (currpage == (i)) {
+                    showtext += "<a class=\"cur\" href=\"javascript:displaypage(" + i + ")\">" + i + "</a> ";
+                } else {
+                    showtext += "<a href=\"javascript:displaypage(" + i + ")\">" + i + "</a> ";
+                }
+            }
+            if (NumPages > 10 && currpages <= NumPages - 1) {
+                if (currpages < NumPages - 1) {
+                    showtext += "...";
+                }
+                showtext += "<a href=\"javascript:displaypage(" + NumPages + ")\">" + NumPages + "</a> ";
+            }
+            showtext = showtext + "<a href=\"javascript:displaypage(currpage+1)\">下一页 </a>";
+            showtext = showtext + "<a href=\"javascript:displaypage(NumPages)\">>></a></span>";
+        }
+        document.getElementById("page1").innerHTML = showtext;
+    }
+</SCRIPT><fieldset style="-moz-border-radius: 8px" align="center"><legend>演示</legend>
+    <div id="title1">
+        <div class="title_list">
+            <ul class="title_list bluepoint">
+                <li><a href="http://www.cnblogs.com/zengxiangzhan/#" target="_blank">学无止境 25</a><span>(03月17日 23:47)</span></li>
+                <li><a href="http://www.cnblogs.com/zengxiangzhan/#" target="_blank">学无止境 24</a><span>(03月17日 23:42)</span></li>
+                <li><a href="http://www.cnblogs.com/zengxiangzhan/#" target="_blank">学无止境 23</a><span>(03月17日 23:32)</span></li>
+                <li><a href="http://www.cnblogs.com/zengxiangzhan/#" target="_blank">学无止境 22</a><span>(03月17日 23:29)</span></li>
+                <li><a href="http://www.cnblogs.com/zengxiangzhan/#" target="_blank">学无止境 21</a><span>(03月17日 23:19)</span></li>
+            </ul>
+        </div>
+    </div>
+    <div id="page1" class="turn_page_box"><span class="tpb_right"><a class="tpb_btn_previous" href="javascript:displaypage(1)"><<</a> <a href="javascript:displaypage(currpage-1)">上一页</a> <a class="cur" href="javascript:displaypage(1)">1</a> <a href="javascript:displaypage(2)">2</a> <a href="javascript:displaypage(3)">3</a> <a href="javascript:displaypage(4)">4</a> <a href="javascript:displaypage(5)">5</a> <a href="javascript:displaypage(currpage+1)">下一页 </a><a href="javascript:displaypage(NumPages)">>></a></span></div>
+    <SCRIPT language=javascript>
+        //默认显示首页的内容
+        displaypage(1);
+    </SCRIPT>
+</body>
+</html>
